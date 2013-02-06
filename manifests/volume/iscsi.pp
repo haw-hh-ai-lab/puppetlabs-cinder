@@ -51,9 +51,10 @@ class cinder::volume::iscsi (
          ensure => 'present',
     }
 
-   service { 'iscsitarget':
+    service { 'iscsitarget':
      ensure => running,
      enable => true,
+    }
   }
 
 }
