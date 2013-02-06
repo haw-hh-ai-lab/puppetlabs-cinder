@@ -56,7 +56,7 @@ class cinder::volume::iscsi (
        owner => 'root',
        group   => 'root',
        mode    => '644',
-       content => "ISCSITARGET_ENABLE=true\n# ietd options\n# See ietd(8) for details\nISCSITARGET_OPTIONS=\"\""
+       content => "ISCSITARGET_ENABLE=true\n# ietd options\n# See ietd(8) for details\nISCSITARGET_OPTIONS=\"\"",
        notify => Service['iscsitarget'],
        require => Package['iscsitarget'],
     }
