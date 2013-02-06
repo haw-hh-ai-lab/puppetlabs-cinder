@@ -43,4 +43,17 @@ class cinder::volume::iscsi (
     }
   }
 
+  # set up the actual iscsi support for the OS
+  if($::operatingsystem == 'Ubuntu') {
+    package{ [ 'iscsitarget' ,
+               'open-iscsi', 'iscsitarget-dkms', 
+               "linux-headers-$::kernelrelease", ]:
+         ensure => 'present',
+    }
+
+   service { 'iscsitarget':
+     ensure => running,
+     enable => true,
+  }
+
 }
