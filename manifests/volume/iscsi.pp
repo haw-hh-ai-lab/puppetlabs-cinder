@@ -51,10 +51,26 @@ class cinder::volume::iscsi (
          ensure => 'present',
     }
 
+    file { '/etc/default/iscsitarget':
+       ensure => present,
+       owner => 'root',
+       group   => 'root',
+       mode    => '644',
+       content => "ISCSITARGET_ENABLE=true\n# ietd options\n# See ietd(8) for details\nISCSITARGET_OPTIONS=\"\""
+       notify => Service['iscsitarget'],
+       require => Package['iscsitarget'],
+    }
+
     service { 'iscsitarget':
      ensure => running,
      enable => true,
     }
+
+   service { 'open-iscsi':
+     ensure => running,
+     enable => true,
+   }
+
   }
 
 }
